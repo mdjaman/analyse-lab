@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2014 1:04:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mdjaman.lab.entity.Privilege" table="privilege" catalog="labo_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Byte">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="libelle" type="string">
+            <column name="libelle" length="50" not-null="true" />
+        </property>
+        <property name="descr" type="string">
+            <column name="descr" length="100" />
+        </property>
+        <set name="utilisateurs" table="utilisateur" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="privilege_id" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Utilisateur" />
+        </set>
+    </class>
+</hibernate-mapping>

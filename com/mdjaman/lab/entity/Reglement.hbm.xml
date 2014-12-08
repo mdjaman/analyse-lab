@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2014 1:04:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mdjaman.lab.entity.Reglement" table="reglement" catalog="labo_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="facture" class="com.mdjaman.lab.entity.Facture" fetch="select">
+            <column name="facture_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="typeReglement" class="com.mdjaman.lab.entity.TypeReglement" fetch="select">
+            <column name="type_reglement_id" not-null="true" />
+        </many-to-one>
+        <property name="numero" type="string">
+            <column name="numero" length="20" not-null="true" />
+        </property>
+        <property name="montantTtc" type="big_decimal">
+            <column name="montant_ttc" precision="8" scale="3" not-null="true" />
+        </property>
+        <property name="remise" type="big_decimal">
+            <column name="remise" precision="8" scale="3" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2014 1:04:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mdjaman.lab.entity.Utilisateur" table="utilisateur" catalog="labo_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="privilege" class="com.mdjaman.lab.entity.Privilege" fetch="select">
+            <column name="privilege_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="utilisateur" class="com.mdjaman.lab.entity.Utilisateur" fetch="select">
+            <column name="responsable" />
+        </many-to-one>
+        <property name="nom" type="string">
+            <column name="nom" length="30" not-null="true" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="prenom" length="100" not-null="true" />
+        </property>
+        <property name="username" type="string">
+            <column name="username" length="50" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="passe" type="string">
+            <column name="passe" length="32" not-null="true" />
+        </property>
+        <property name="token" type="string">
+            <column name="token" length="32" not-null="true" />
+        </property>
+        <property name="activcode" type="string">
+            <column name="activcode" length="50" not-null="true" />
+        </property>
+        <property name="contact" type="string">
+            <column name="contact" length="25" />
+        </property>
+        <property name="actif" type="boolean">
+            <column name="actif" not-null="true" />
+        </property>
+        <property name="picture" type="string">
+            <column name="picture" length="50" />
+        </property>
+        <property name="gender" type="char">
+            <column name="gender" length="1" not-null="true" />
+        </property>
+        <set name="visites" table="visite" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="utilisateur_id" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Visite" />
+        </set>
+        <set name="utilisateurs" table="utilisateur" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="responsable" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Utilisateur" />
+        </set>
+    </class>
+</hibernate-mapping>

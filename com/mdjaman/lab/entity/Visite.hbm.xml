@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2014 1:04:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mdjaman.lab.entity.Visite" table="visite" catalog="labo_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="patient" class="com.mdjaman.lab.entity.Patient" fetch="select">
+            <column name="patient_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personnel" class="com.mdjaman.lab.entity.Personnel" fetch="select">
+            <column name="homologue_par" not-null="true" />
+        </many-to-one>
+        <many-to-one name="prescripteur" class="com.mdjaman.lab.entity.Prescripteur" fetch="select">
+            <column name="prescripteur_id" />
+        </many-to-one>
+        <many-to-one name="utilisateur" class="com.mdjaman.lab.entity.Utilisateur" fetch="select">
+            <column name="utilisateur_id" not-null="true" />
+        </many-to-one>
+        <property name="code" type="string">
+            <column name="code" length="20" not-null="true" />
+        </property>
+        <property name="typePatient" type="string">
+            <column name="type_patient" length="2" not-null="true" />
+        </property>
+        <property name="obvservation" type="string">
+            <column name="obvservation" />
+        </property>
+        <set name="factures" table="facture" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="visite_id" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Facture" />
+        </set>
+    </class>
+</hibernate-mapping>

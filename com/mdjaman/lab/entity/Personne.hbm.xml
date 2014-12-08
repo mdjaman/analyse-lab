@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2014 1:04:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mdjaman.lab.entity.Personne" table="personne" catalog="labo_db" optimistic-lock="version">
+        <id name="id" type="string">
+            <column name="id" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="nom" type="string">
+            <column name="nom" length="50" not-null="true" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="prenom" length="100" not-null="true" />
+        </property>
+        <property name="datenaiss" type="date">
+            <column name="datenaiss" length="10" not-null="true" />
+        </property>
+        <property name="sexe" type="string">
+            <column name="sexe" length="50" not-null="true" />
+        </property>
+        <property name="lieunaiss" type="string">
+            <column name="lieunaiss" length="50" />
+        </property>
+        <property name="emploi" type="string">
+            <column name="emploi" length="50" />
+        </property>
+        <set name="prescripteurs" table="prescripteur" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="personne_id" length="50" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Prescripteur" />
+        </set>
+        <set name="patients" table="patient" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="personne_id" length="50" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Patient" />
+        </set>
+        <set name="adresses" table="adresse" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="personne_id" length="50" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Adresse" />
+        </set>
+        <set name="contacts" table="contact" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="personne_id" length="50" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Contact" />
+        </set>
+        <set name="personnels" table="personnel" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="personne_id" length="50" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Personnel" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2014 1:04:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mdjaman.lab.entity.Personnel" table="personnel" catalog="labo_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="personne" class="com.mdjaman.lab.entity.Personne" fetch="select">
+            <column name="personne_id" length="50" not-null="true" />
+        </many-to-one>
+        <property name="titre" type="string">
+            <column name="titre" length="50" />
+        </property>
+        <property name="fonction" type="string">
+            <column name="fonction" length="50" not-null="true" />
+        </property>
+        <property name="role" type="string">
+            <column name="role" length="50" not-null="true" />
+        </property>
+        <property name="specialitePersonnelId" type="int">
+            <column name="specialite_personnel_id" not-null="true" />
+        </property>
+        <set name="visites" table="visite" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="homologue_par" not-null="true" />
+            </key>
+            <one-to-many class="com.mdjaman.lab.entity.Visite" />
+        </set>
+    </class>
+</hibernate-mapping>
